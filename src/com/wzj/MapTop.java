@@ -43,8 +43,17 @@ public class MapTop {
             }
             //如果右键被点击
             if (GameUtil.RIGHT){
-                System.out.println(GameUtil.MOUSE_X);
-                System.out.println(GameUtil.MOUSE_Y);
+//                System.out.println(GameUtil.MOUSE_X);
+//                System.out.println(GameUtil.MOUSE_Y);
+                //覆盖则插旗
+                if (GameUtil.DATA_TOP[temp_x][temp_y]==0){
+                    GameUtil.DATA_TOP[temp_x][temp_y]=1;
+                }
+                //插旗则取消
+                else if (GameUtil.DATA_TOP[temp_x][temp_y]==1){
+                    GameUtil.DATA_TOP[temp_x][temp_y]=0;
+                }
+
                 GameUtil.RIGHT=false;
             }
         }
