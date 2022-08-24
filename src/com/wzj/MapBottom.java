@@ -11,6 +11,20 @@ public class MapBottom {
     BottomRay bottomRay=new BottomRay();
     //底层数字类
     BottomNum bottomNum =new BottomNum();
+    {
+        bottomRay.newRay();
+        bottomNum.newNum();
+    }
+    //重置游戏
+    void reGame(){
+        for (int i = 1; i <=GameUtil.MAP_W ; i++) {
+            for (int j = 1; j <= GameUtil.MAP_H; j++) {
+              GameUtil.DATA_BOTTOM[i][j]=0;
+            }
+        }
+        bottomRay.newRay();
+        bottomNum.newNum();
+    }
     //绘制方法
     void paintSelf(Graphics g){
         //写入一个循环绘制方法

@@ -13,7 +13,9 @@ public class BottomRay {
     //是否放置T表示可以放置F表示不可放置
     boolean isPlace = true;
 
-    {
+
+
+    void newRay(){
         //地雷每次生成一个坐标，需要循环从0到结束
         for (int i = 0; i < GameUtil.RAY_MAX*2; i=i+2) {
             //每次生成随机坐标

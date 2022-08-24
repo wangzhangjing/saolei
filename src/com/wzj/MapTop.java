@@ -13,6 +13,15 @@ public class MapTop {
     int temp_x;
     int temp_y;
 
+    //重置游戏
+    void reGame(){
+        for (int i = 1; i <=GameUtil.MAP_W ; i++) {
+            for (int j = 1; j <= GameUtil.MAP_H; j++) {
+                GameUtil.DATA_TOP[i][j]=0;
+            }
+        }
+    }
+
     //判断逻辑
     void logic(){
         //写入坐标

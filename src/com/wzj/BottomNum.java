@@ -4,7 +4,7 @@ package com.wzj;
  * 底层数字类
  */
 public class BottomNum {
-    {   //从宽遍历
+    void newNum(){   //从宽遍历
         for (int i = 1; i <=GameUtil.MAP_W ; i++) {
             //从高遍历
             for (int j = 1; j <=GameUtil.MAP_H ; j++) {

@@ -33,25 +33,43 @@ public class GameWin extends JFrame {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //1鼠标左键被点击
-                if (e.getButton()==1){
+                switch (GameUtil.state){
+                    case 0:
+                        //1鼠标左键被点击
+                        if (e.getButton()==1){
 //                    System.out.println(1);
-                    //提交坐标
-                    GameUtil.MOUSE_X=e.getX();
-                    GameUtil.MOUSE_Y=e.getY();
-                    //相关鼠标左键状态
-                    GameUtil.LEFT=true;
-                }
-                //2是滚轮被点击
-                //3鼠标右键被点击
-                if (e.getButton()==3){
+                            //提交坐标
+                            GameUtil.MOUSE_X=e.getX();
+                            GameUtil.MOUSE_Y=e.getY();
+                            //相关鼠标左键状态
+                            GameUtil.LEFT=true;
+                        }
+                        //2是滚轮被点击
+                        //3鼠标右键被点击
+                        if (e.getButton()==3){
 //                    System.out.println(3);
-                    //提交坐标
-                    GameUtil.MOUSE_X=e.getX();
-                    GameUtil.MOUSE_Y=e.getY();
-                    //相关鼠标左键状态
-                    GameUtil.RIGHT=true;
+                            //提交坐标
+                            GameUtil.MOUSE_X=e.getX();
+                            GameUtil.MOUSE_Y=e.getY();
+                            //相关鼠标左键状态
+                            GameUtil.RIGHT=true;
+                        }
+                    case 1:
+                    case 2:
+                        if (e.getButton()==1){
+                            if (e.getX()>GameUtil.OFFSET+GameUtil.SQUARE_LENGTH*(GameUtil.MAP_W/2)
+                                    && e.getX()<GameUtil.OFFSET+GameUtil.SQUARE_LENGTH*(GameUtil.MAP_W/2)+GameUtil.SQUARE_LENGTH
+                                    &&e.getY()>GameUtil.OFFSET
+                                    &&e.getY()<GameUtil.OFFSET+GameUtil.SQUARE_LENGTH){
+                                mapBottom.reGame();
+                                mapTop.reGame();
+                                GameUtil.state=0;
+                            }
+                        }
+                        break;
+                    default:
                 }
+
             }
         });
         while (true){

@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class GameUtil {
     //地雷的个数
-    static int RAY_MAX = 2;
+    static int RAY_MAX = 5;
     //地图的宽
     static int MAP_W = 11;
     //地图的高
