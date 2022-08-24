@@ -60,6 +60,7 @@ public class MapTop {
             }
         }
       boom();
+      victory();
     }
     //失败后显示雷区所有雷
     void seeBoom(){
@@ -105,6 +106,31 @@ public class MapTop {
             }
         }
     }
+    //胜利判定t表示胜利f表示为胜利
+    boolean victory(){
+        //统计被打开格子数
+        int count=0;
+        for (int i = 1; i <=GameUtil.MAP_W ; i++) {
+            for (int j = 1; j <= GameUtil.MAP_H; j++) {
+               if (GameUtil.DATA_TOP[i][j]!=-1){
+                   count++;
+               }
+            }
+        }
+        if (count==GameUtil.RAY_MAX){
+            System.out.println("胜利");
+            for (int i = 1; i <=GameUtil.MAP_W ; i++) {
+                for (int j = 1; j <= GameUtil.MAP_H; j++) {
+                  if (GameUtil.DATA_TOP[i][j]==0){
+                      GameUtil.DATA_TOP[i][j]=1;
+                  }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
     //失败判定t表示失败f表示没有失败
     boolean boom(){
         for (int i = 1; i <=GameUtil.MAP_W ; i++) {
