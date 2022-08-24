@@ -21,6 +21,15 @@ public class GameUtil {
     //格子的边长
     static int SQUARE_LENGTH = 50;
 
+    //鼠标相关参数
+    //恒坐标
+    static int MOUSE_X;
+    //纵坐标
+    static int MOUSE_Y;
+    //状态
+    static boolean LEFT = false;
+    static boolean RIGHT = false;
+
     //底层元素 -1代表雷 0代表空 1-8表示对应的数组
     static int[][] DATA_BOTTOM =new int[MAP_W+2][MAP_H+2];
     //顶层元素元素 -1代无覆盖 0代表覆盖 1表示插旗2表示插错旗

@@ -8,7 +8,52 @@ import java.awt.*;
  * 判断逻辑
  */
 public class MapTop {
+
+    //格子位置
+    int temp_x;
+    int temp_y;
+
+    //判断逻辑
+    void logic(){
+        //写入坐标
+        //添加判断以避免没点击其他格子也翻开
+        temp_x=0;
+        temp_y=0;
+        if (GameUtil.MOUSE_X>GameUtil.OFFSET && GameUtil.MOUSE_Y>3*GameUtil.OFFSET){
+            temp_x =(GameUtil.MOUSE_X-GameUtil.OFFSET)/GameUtil.SQUARE_LENGTH+1;
+            temp_y =(GameUtil.MOUSE_Y-GameUtil.OFFSET*3)/GameUtil.SQUARE_LENGTH+1;
+        }
+        //判断是否点击窗口中网格位置
+        if (temp_x>=1&&temp_x<=GameUtil.MAP_W
+        &&temp_y>=1&&temp_y<=GameUtil.MAP_H){
+            //如果左键被点击
+            if (GameUtil.LEFT){
+                if (GameUtil.LEFT){
+                    //如果是0（初始被覆盖）取消覆盖
+                    if (GameUtil.DATA_TOP[temp_x][temp_y]==0){
+                        GameUtil.DATA_TOP[temp_x][temp_y]=-1;
+                    }
+                    GameUtil.LEFT=false;
+                }
+//                System.out.println(GameUtil.MOUSE_X);
+//                System.out.println(GameUtil.MOUSE_Y);
+//                GameUtil.LEFT=false;
+
+            }
+            //如果右键被点击
+            if (GameUtil.RIGHT){
+                System.out.println(GameUtil.MOUSE_X);
+                System.out.println(GameUtil.MOUSE_Y);
+                GameUtil.RIGHT=false;
+            }
+        }
+
+    }
+
+
     void paintSelf(Graphics g){
+        //调用逻辑
+        logic();
         //填充图片
         for (int i = 1; i <= GameUtil.MAP_W; i++) {
             //二维数组需要循环遍历

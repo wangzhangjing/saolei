@@ -2,6 +2,8 @@ package com.wzj;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 //继承JFrame拥有窗口监听功能
 public class GameWin extends JFrame {
@@ -27,6 +29,31 @@ public class GameWin extends JFrame {
         this.setTitle("扫雷游戏");
         //添加关闭窗口的方法
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //鼠标点击事件
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //1鼠标左键被点击
+                if (e.getButton()==1){
+//                    System.out.println(1);
+                    //提交坐标
+                    GameUtil.MOUSE_X=e.getX();
+                    GameUtil.MOUSE_Y=e.getY();
+                    //相关鼠标左键状态
+                    GameUtil.LEFT=true;
+                }
+                //2是滚轮被点击
+                //3鼠标右键被点击
+                if (e.getButton()==3){
+//                    System.out.println(3);
+                    //提交坐标
+                    GameUtil.MOUSE_X=e.getX();
+                    GameUtil.MOUSE_Y=e.getY();
+                    //相关鼠标左键状态
+                    GameUtil.RIGHT=true;
+                }
+            }
+        });
         while (true){
             repaint();
             try {
