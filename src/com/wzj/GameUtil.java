@@ -29,6 +29,8 @@ public class GameUtil {
     //状态
     static boolean LEFT = false;
     static boolean RIGHT = false;
+    //0代表游戏中1代表胜利2代表失败
+    static int state =0;
 
     //底层元素 -1代表雷 0代表空 1-8表示对应的数组
     static int[][] DATA_BOTTOM =new int[MAP_W+2][MAP_H+2];
@@ -40,6 +42,9 @@ public class GameUtil {
     static Image flag = Toolkit.getDefaultToolkit().getImage("imgs/flag.gif");
     static Image noflag = Toolkit.getDefaultToolkit().getImage("imgs/noflag.png");
 
+    static Image face = Toolkit.getDefaultToolkit().getImage("imgs/face.png");
+    static Image over = Toolkit.getDefaultToolkit().getImage("imgs/over.png");
+    static Image win = Toolkit.getDefaultToolkit().getImage("imgs/win.png");
 
     //数字图片
     static Image[] images=new Image[9];

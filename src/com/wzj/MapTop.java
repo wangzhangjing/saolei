@@ -118,7 +118,7 @@ public class MapTop {
             }
         }
         if (count==GameUtil.RAY_MAX){
-            System.out.println("胜利");
+            GameUtil.state=1;
             for (int i = 1; i <=GameUtil.MAP_W ; i++) {
                 for (int j = 1; j <= GameUtil.MAP_H; j++) {
                   if (GameUtil.DATA_TOP[i][j]==0){
@@ -136,7 +136,7 @@ public class MapTop {
         for (int i = 1; i <=GameUtil.MAP_W ; i++) {
             for (int j = 1; j <=GameUtil.MAP_H ; j++) {
                if (GameUtil.DATA_BOTTOM[i][j]==-1&&GameUtil.DATA_TOP[i][j]==-1){
-                   System.out.println("失败");
+                   GameUtil.state=2;
                    seeBoom();
                    return true;
                }

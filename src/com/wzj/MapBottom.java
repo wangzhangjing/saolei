@@ -58,5 +58,25 @@ public class MapBottom {
                 }
             }
         }
+        switch (GameUtil.state){
+            case 0:
+                g.drawImage(GameUtil.face,
+                        GameUtil.OFFSET+GameUtil.SQUARE_LENGTH*(GameUtil.MAP_W/2),
+                        GameUtil.OFFSET,
+                        null);
+                break;
+            case 1:
+                g.drawImage(GameUtil.win,
+                        GameUtil.OFFSET+GameUtil.SQUARE_LENGTH*(GameUtil.MAP_W/2),
+                        GameUtil.OFFSET,
+                        null);
+                break;
+            case 2:
+                g.drawImage(GameUtil.over,
+                        GameUtil.OFFSET+GameUtil.SQUARE_LENGTH*(GameUtil.MAP_W/2),
+                        GameUtil.OFFSET,
+                        null);
+                break;
+        }
     }
 }
