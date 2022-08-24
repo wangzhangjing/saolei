@@ -52,13 +52,74 @@ public class MapTop {
                 //插旗则取消
                 else if (GameUtil.DATA_TOP[temp_x][temp_y]==1){
                     GameUtil.DATA_TOP[temp_x][temp_y]=0;
+                }else  if (GameUtil.DATA_TOP[temp_x][temp_y]==-1){
+                    numOpen(temp_x,temp_y);
                 }
 
                 GameUtil.RIGHT=false;
             }
         }
-
+      boom();
     }
+    //失败后显示雷区所有雷
+    void seeBoom(){
+        for (int i = 1; i <=GameUtil.MAP_W ; i++) {
+            for (int j = 1; j <=GameUtil.MAP_H ; j++) {
+                //低层是雷顶层不是旗，显示
+                if (GameUtil.DATA_BOTTOM[i][j]==-1&&GameUtil.DATA_TOP[i][j]!=1){
+                    GameUtil.DATA_TOP[i][j]=-1;
+                }
+                //低层是雷 顶层是旗，显示插错旗
+                if (GameUtil.DATA_BOTTOM[i][j]!=-1&&GameUtil.DATA_TOP[i][j]==1){
+                    GameUtil.DATA_TOP[i][j]=2;
+                }
+            }
+
+        }
+    }
+
+    //数字翻开
+    void numOpen(int x,int y){
+        //记录旗数
+        int count=0;
+        if (GameUtil.DATA_BOTTOM[x][y]>0){
+            for (int i = x-1; i <=x+1 ; i++) {
+                for (int j = y - 1; j <= y + 1; j++) {
+                    if (GameUtil.DATA_TOP[i][j]==1){
+                        count++;
+                    }
+                }
+            }
+            if (count == GameUtil.DATA_BOTTOM[x][y]) {
+                for (int i = x-1; i <=x+1 ; i++) {
+                    for (int j = y - 1; j <= y + 1; j++) {
+                       if (GameUtil.DATA_TOP[i][j]!=1){
+                           GameUtil.DATA_TOP[i][j]=-1;
+                       }
+                        //必须在雷区中
+                        if (i>=1&&j>=1&&i<=GameUtil.MAP_W&&j<=GameUtil.MAP_H){
+                            spaceOpen(i,j);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //失败判定t表示失败f表示没有失败
+    boolean boom(){
+        for (int i = 1; i <=GameUtil.MAP_W ; i++) {
+            for (int j = 1; j <=GameUtil.MAP_H ; j++) {
+               if (GameUtil.DATA_BOTTOM[i][j]==-1&&GameUtil.DATA_TOP[i][j]==-1){
+                   System.out.println("失败");
+                   seeBoom();
+                   return true;
+               }
+            }
+
+        }
+        return false;
+    }
+
     //利用递归打开周围没有雷的格子
     void spaceOpen(int x,int y){
         if (GameUtil.DATA_BOTTOM[x][y]==0){
@@ -67,6 +128,7 @@ public class MapTop {
                     //覆盖，才递归
                     if (GameUtil.DATA_TOP[i][j]!=-1){
                         GameUtil.DATA_TOP[i][j]=-1;
+                        //必须在雷区中
                         if (i>=1&&j>=1&&i<=GameUtil.MAP_W&&j<=GameUtil.MAP_H){
                             spaceOpen(i,j);
                         }
