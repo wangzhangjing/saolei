@@ -7,7 +7,7 @@ package com.wzj;
 public class BottomRay {
     //存放坐标
     //该数组中相连两个数代表地雷的坐标
-    int [] rays =new int[GameUtil.RAY_MAX*2];
+    static int [] rays =new int[GameUtil.RAY_MAX*2];
     //地雷坐标
     int x,y;
     //是否放置T表示可以放置F表示不可放置

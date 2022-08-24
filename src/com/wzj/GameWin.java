@@ -17,14 +17,22 @@ public class GameWin extends JFrame {
     MapBottom mapBottom=new MapBottom();
     MapTop mapTop=new MapTop();
 
+    GameSelect gameSelect=new GameSelect();
+    //是否开始f未开始t开始
+    boolean begin=false;
+
     void launch(){
         //记录开始时间
         GameUtil.START_TIME=System.currentTimeMillis();
         //查看窗口是否可见
         this.setVisible(true);
+        if (GameUtil.state==3){
+            this.setSize(500,500);
+        }else {
+            this.setSize(wigth,height);
+        }
         //窗口大小
 //        this.setSize(500,500);
-        this.setSize(wigth,height);
         //窗口位置null为居中显示
         this.setLocationRelativeTo(null);
         //设置窗口标题
@@ -70,6 +78,19 @@ public class GameWin extends JFrame {
                                 GameUtil.state=0;
                             }
                         }
+                        if (e.getButton()==2){
+                            GameUtil.state=3;
+                            begin=true;
+                        }
+                        break;
+                    case 3:
+                        if (e.getButton()==1){
+                            //提交坐标
+                            GameUtil.MOUSE_X=e.getX();
+                            GameUtil.MOUSE_Y=e.getY();
+                            //相关鼠标左键状态
+                            begin = gameSelect.hard();
+                        }
                         break;
                     default:
                 }
@@ -78,6 +99,7 @@ public class GameWin extends JFrame {
         });
         while (true){
             repaint();
+            begin();
             try {
                 Thread.sleep(40);
             } catch (InterruptedException e) {
@@ -85,9 +107,27 @@ public class GameWin extends JFrame {
             }
         }
     }
+    void begin(){
+        if (begin){
+            begin=false;
+            gameSelect.hard(GameUtil.level);
+            dispose();
+            GameWin gameWin=new GameWin();
+            GameUtil.START_TIME=System.currentTimeMillis();
+            GameUtil.FLAG_NUM=0;
+            mapBottom.reGame();
+            mapTop.reGame();
+            gameWin.launch();
+        }
+    }
 
     //创建一个方法其中g.drawLine画像方法
     public void paint(Graphics g) {
+        if (GameUtil.state==3){
+            g.setColor(Color.white);
+            g.fillRect(0,0,500,500);
+            gameSelect.paintSelf(g);
+        }else {
 //        //设置颜色
 //        g.setColor(Color.red);
 //        //传入起点坐标和终点坐标
@@ -104,6 +144,7 @@ public class GameWin extends JFrame {
         mapBottom.paintSelf(gImage);
         mapTop.paintSelf(gImage);
         g.drawImage(offScreenImage,0,0,null);
+     }
     }
 
     //添加入口函数
