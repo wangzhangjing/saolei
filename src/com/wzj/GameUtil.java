@@ -23,9 +23,15 @@ public class GameUtil {
 
     //底层元素 -1代表雷 0代表空 1-8表示对应的数组
     static int[][] DATA_BOTTOM =new int[MAP_W+2][MAP_H+2];
-
+    //顶层元素元素 -1代无覆盖 0代表覆盖 1表示插旗2表示插错旗
+    static int[][] DATA_TOP =new int[MAP_W+2][MAP_H+2];
     //载入图片
     static Image lei = Toolkit.getDefaultToolkit().getImage("imgs/lei.png");
+    static Image top = Toolkit.getDefaultToolkit().getImage("imgs/top.gif");
+    static Image flag = Toolkit.getDefaultToolkit().getImage("imgs/flag.gif");
+    static Image noflag = Toolkit.getDefaultToolkit().getImage("imgs/noflag.png");
+
+
     //数字图片
     static Image[] images=new Image[9];
     static{

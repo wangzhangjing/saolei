@@ -10,6 +10,7 @@ public class GameWin extends JFrame {
     //90+11*50
     int height =4*GameUtil.OFFSET+GameUtil.MAP_H*GameUtil.SQUARE_LENGTH;
     MapBottom mapBottom=new MapBottom();
+    MapTop mapTop=new MapTop();
 
     void launch(){
         //查看窗口是否可见
@@ -41,6 +42,7 @@ public class GameWin extends JFrame {
 //        g.drawLine(100,100,100,400);
 //        g.drawLine(100,100,400,100);
         mapBottom.paintSelf(g);
+        mapTop.paintSelf(g);
     }
 
     //添加入口函数
