@@ -33,6 +33,7 @@ public class MapTop {
                     if (GameUtil.DATA_TOP[temp_x][temp_y]==0){
                         GameUtil.DATA_TOP[temp_x][temp_y]=-1;
                     }
+                    spaceOpen(temp_x,temp_y);
                     GameUtil.LEFT=false;
                 }
 //                System.out.println(GameUtil.MOUSE_X);
@@ -49,7 +50,22 @@ public class MapTop {
         }
 
     }
-
+    //利用递归打开周围没有雷的格子
+    void spaceOpen(int x,int y){
+        if (GameUtil.DATA_BOTTOM[x][y]==0){
+            for (int i = x-1; i <=x+1 ; i++) {
+                for (int j = y-1; j <=y+1 ; j++) {
+                    //覆盖，才递归
+                    if (GameUtil.DATA_TOP[i][j]!=-1){
+                        GameUtil.DATA_TOP[i][j]=-1;
+                        if (i>=1&&j>=1&&i<=GameUtil.MAP_W&&j<=GameUtil.MAP_H){
+                            spaceOpen(i,j);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     void paintSelf(Graphics g){
         //调用逻辑
