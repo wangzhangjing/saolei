@@ -9,6 +9,9 @@ public class GameWin extends JFrame {
     int wigth =2*GameUtil.OFFSET+GameUtil.MAP_W*GameUtil.SQUARE_LENGTH;
     //90+11*50
     int height =4*GameUtil.OFFSET+GameUtil.MAP_H*GameUtil.SQUARE_LENGTH;
+    //添加最底层画布
+    Image offScreenImage = null;
+
     MapBottom mapBottom=new MapBottom();
     MapTop mapTop=new MapTop();
 
@@ -41,8 +44,17 @@ public class GameWin extends JFrame {
 //        //传入起点坐标和终点坐标
 //        g.drawLine(100,100,100,400);
 //        g.drawLine(100,100,400,100);
-        mapBottom.paintSelf(g);
-        mapTop.paintSelf(g);
+        //设置画布的高宽
+        offScreenImage=this.createImage(wigth,height);
+        Graphics gImage = offScreenImage.getGraphics();
+        //设置颜色
+        gImage.setColor(Color.magenta);
+        //填充全部画布
+        gImage.fillRect(0,0,wigth,height);
+        //把mapBottom和maptop存入该最低层画布中
+        mapBottom.paintSelf(gImage);
+        mapTop.paintSelf(gImage);
+        g.drawImage(offScreenImage,0,0,null);
     }
 
     //添加入口函数
