@@ -18,6 +18,8 @@ public class GameWin extends JFrame {
     MapTop mapTop=new MapTop();
 
     void launch(){
+        //记录开始时间
+        GameUtil.START_TIME=System.currentTimeMillis();
         //查看窗口是否可见
         this.setVisible(true);
         //窗口大小
@@ -63,6 +65,8 @@ public class GameWin extends JFrame {
                                     &&e.getY()<GameUtil.OFFSET+GameUtil.SQUARE_LENGTH){
                                 mapBottom.reGame();
                                 mapTop.reGame();
+                                GameUtil.FLAG_NUM=0;
+                                GameUtil.START_TIME=System.currentTimeMillis();
                                 GameUtil.state=0;
                             }
                         }

@@ -25,6 +25,7 @@ public class MapBottom {
         bottomRay.newRay();
         bottomNum.newNum();
     }
+
     //绘制方法
     void paintSelf(Graphics g){
         //写入一个循环绘制方法
@@ -72,8 +73,17 @@ public class MapBottom {
                 }
             }
         }
+        //绘制数字剩余雷数,倒计时
+        GameUtil.drawWord(g,""+(GameUtil.RAY_MAX-GameUtil.FLAG_NUM),
+                GameUtil.OFFSET,2*GameUtil.OFFSET,30,Color.orange);
+        GameUtil.drawWord(g,""+(GameUtil.END_TIME-GameUtil.START_TIME)/1000,
+                GameUtil.OFFSET+GameUtil.SQUARE_LENGTH*(GameUtil.MAP_W-1),
+                2*GameUtil.OFFSET,
+                30,Color.orange);
         switch (GameUtil.state){
             case 0:
+                GameUtil.END_TIME=System.currentTimeMillis();
+
                 g.drawImage(GameUtil.face,
                         GameUtil.OFFSET+GameUtil.SQUARE_LENGTH*(GameUtil.MAP_W/2),
                         GameUtil.OFFSET,

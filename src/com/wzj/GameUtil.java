@@ -20,6 +20,9 @@ public class GameUtil {
     static int OFFSET = 45;
     //格子的边长
     static int SQUARE_LENGTH = 50;
+    //插旗数量
+    static int FLAG_NUM = 0;
+
 
     //鼠标相关参数
     //恒坐标
@@ -31,6 +34,9 @@ public class GameUtil {
     static boolean RIGHT = false;
     //0代表游戏中1代表胜利2代表失败
     static int state =0;
+
+    static long START_TIME;
+    static long END_TIME;
 
     //底层元素 -1代表雷 0代表空 1-8表示对应的数组
     static int[][] DATA_BOTTOM =new int[MAP_W+2][MAP_H+2];
@@ -52,5 +58,11 @@ public class GameUtil {
         for (int i = 1; i <=8; i++) {
             images[i]= Toolkit.getDefaultToolkit().getImage("imgs/num/"+i+".png");
         }
+    }
+
+    static void drawWord(Graphics g,String str,int x,int y,int size,Color color){
+        g.setColor(color);
+        g.setFont(new Font("仿宋",Font.BOLD,size));
+        g.drawString(str,x,y);
     }
 }

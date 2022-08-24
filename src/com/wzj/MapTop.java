@@ -57,12 +57,14 @@ public class MapTop {
                 //覆盖则插旗
                 if (GameUtil.DATA_TOP[temp_x][temp_y]==0){
                     GameUtil.DATA_TOP[temp_x][temp_y]=1;
+                    GameUtil.FLAG_NUM++;
                 }
                 //插旗则取消
                 else if (GameUtil.DATA_TOP[temp_x][temp_y]==1){
                     GameUtil.DATA_TOP[temp_x][temp_y]=0;
                 }else  if (GameUtil.DATA_TOP[temp_x][temp_y]==-1){
                     numOpen(temp_x,temp_y);
+                    GameUtil.FLAG_NUM--;
                 }
 
                 GameUtil.RIGHT=false;
@@ -142,6 +144,15 @@ public class MapTop {
 
     //失败判定t表示失败f表示没有失败
     boolean boom(){
+        if (GameUtil.FLAG_NUM==GameUtil.RAY_MAX){
+            for (int i = 1; i <=GameUtil.MAP_W ; i++) {
+                for (int j = 1; j <=GameUtil.MAP_H ; j++) {
+                    if (GameUtil.DATA_TOP[i][j]==0){
+                        GameUtil.DATA_TOP[i][j]=-1;
+                    }
+                }
+            }
+        }
         for (int i = 1; i <=GameUtil.MAP_W ; i++) {
             for (int j = 1; j <=GameUtil.MAP_H ; j++) {
                if (GameUtil.DATA_BOTTOM[i][j]==-1&&GameUtil.DATA_TOP[i][j]==-1){
@@ -162,6 +173,9 @@ public class MapTop {
                 for (int j = y-1; j <=y+1 ; j++) {
                     //覆盖，才递归
                     if (GameUtil.DATA_TOP[i][j]!=-1){
+                        if (GameUtil.DATA_TOP[i][j]==1){
+                            GameUtil.FLAG_NUM--;
+                        }
                         GameUtil.DATA_TOP[i][j]=-1;
                         //必须在雷区中
                         if (i>=1&&j>=1&&i<=GameUtil.MAP_W&&j<=GameUtil.MAP_H){
